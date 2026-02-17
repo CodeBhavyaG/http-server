@@ -23,7 +23,7 @@ class routing{
 					System.out.println(header[0] + "on path" + header[1]);
 				
 				PrintWriter writer = new PrintWriter(s.getOutputStream());
-				writer.println("HTTP/1.2 200 OK");
+				writer.println("HTTP/1.1 200 OK");
 				writer.println("Content-Type: text/html");
 				writer.println();
 				writer.println("<h1>Connected</h1>");
