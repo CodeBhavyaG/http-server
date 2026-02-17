@@ -27,7 +27,6 @@ class routing{
 						System.out.println("i am here");
 						redirect(s,header[1]);
 					}
-
 				
 				}
 				catch(IOException i ){System.out.println(i);}
