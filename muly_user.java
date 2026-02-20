@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class muly_user{
@@ -37,10 +38,21 @@ class MyRunner implements Runnable{
 			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
 			String m;
+			int contentLength = 0;
 
-			while((m=reader.readLine()) != null && !m.isEmpty()){
+			while (!(m = reader.readLine()).isEmpty()) {
 				System.out.println(m);
+				if (m.startsWith("Content-Length:")) {
+					contentLength = Integer.parseInt(m.split(":")[1].trim());
+				}
 			}
+			
+			char[] body = new char[contentLength];
+			reader.read(body, 0, contentLength);
+			String[] content = new String(body).split("&");
+
+			System.out.println("Body:\n" + Arrays.toString(content));
+
 			System.out.println(muly_user.counter);
 
 			PrintWriter writer = new PrintWriter(s1.getOutputStream());
@@ -56,21 +68,8 @@ class MyRunner implements Runnable{
 				}
 			}
 			writer.flush();
-			// boolean check = true;
-			m = reader.readLine();
-			while (!m.isEmpty()/* && !m.isEmpty()*/) {
-				// for (int i=0 ; i<200 ; i++) {
-				System.out.println(m);
-				m = reader.readLine();
-				// if (check && m == null) {
-				// 	m = reader.readLine();
-				// 	check = false;
-				// }
-			}
-			for (int i = 0; i < 91; i++) {
-				m = reader.readLine();
-				System.out.println(m);
-			}
+			
+
 			// System.out.print("\nYour order: ");
 			// Scanner sc = new Scanner(System.in);
 			// writer.println("<h3>" + sc.nextLine() + "</h3>");
