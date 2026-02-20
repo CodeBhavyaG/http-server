@@ -5,10 +5,9 @@ public class socketserver{
        public static void main(String args[]){
 		try(ServerSocket ss = new ServerSocket(8080)){
 		
-		DataInputStream in = null;
 		while(true){
 		try(Socket s = ss.accept()){
-			in = new DataInputStream(s.getInputStream());
+			DataInputStream in = new DataInputStream(s.getInputStream());
 			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			String m;
 

@@ -1,12 +1,13 @@
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
 public class muly_user{
 
 	public static int counter = 0;
 	public static void main(String args[]){
 		
-		try(ServerSocket ss = new ServerSocket(8080)){
+		try (ServerSocket ss = new ServerSocket(8080)){
 			System.out.println("Wating for Request");
 			while(true){
 				Socket s = ss.accept();
@@ -32,23 +33,54 @@ class MyRunner implements Runnable{
 	@Override
 	public void run(){
 		try(Socket s1 = this.s){
-		DataInputStream input = new DataInputStream(s1.getInputStream());
-		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+			DataInputStream input = new DataInputStream(s1.getInputStream());
+			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
-		String m;
+			String m;
 
-		while((m=reader.readLine()) != null && !m.isEmpty()){
-			System.out.println(m);
+			while((m=reader.readLine()) != null && !m.isEmpty()){
+				System.out.println(m);
+			}
+			System.out.println(muly_user.counter);
+
+			PrintWriter writer = new PrintWriter(s1.getOutputStream());
+			writer.println("HTTP/1.1 200 OK");
+			writer.println("Content-Type: text/html");
+			writer.println();
+			writer.println("<h1>Connection made</h1>");
+			try (BufferedReader f = new BufferedReader(new FileReader("marathonform.html"))) {
+				String line = f.readLine();
+				while (line != null) {
+					writer.println(line);
+					line = f.readLine();
+				}
+			}
+			writer.flush();
+			// boolean check = true;
+			m = reader.readLine();
+			while (!m.isEmpty()/* && !m.isEmpty()*/) {
+				// for (int i=0 ; i<200 ; i++) {
+				System.out.println(m);
+				m = reader.readLine();
+				// if (check && m == null) {
+				// 	m = reader.readLine();
+				// 	check = false;
+				// }
+			}
+			for (int i = 0; i < 91; i++) {
+				m = reader.readLine();
+				System.out.println(m);
+			}
+			// System.out.print("\nYour order: ");
+			// Scanner sc = new Scanner(System.in);
+			// writer.println("<h3>" + sc.nextLine() + "</h3>");
+			// writer.flush();
 		}
-		System.out.println(new muly_user().counter);
-
-		PrintWriter writer = new PrintWriter(s1.getOutputStream());
-		writer.println("HTTP/1.1 200 OK");
-		writer.println("Content-Type: text/html");
-		writer.println();
-		writer.println("<h1>Connection made</h1>");
-		writer.flush();
+		catch (IOException e) {
+			System.out.println(e);
 		}
-		catch(IOException e){System.out.println(e);}
+		catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
 	}
 }
