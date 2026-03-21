@@ -10,8 +10,7 @@ public class Server {
     }
 
     public void start() {
-        try {
-            ServerSocket serverSocket = new ServerSocket(port);
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("Server started on port " + port);
 
             while (true) {
@@ -24,6 +23,5 @@ public class Server {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        serverSocket.close();
     }
 }

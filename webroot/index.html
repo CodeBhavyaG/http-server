@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dummy WebApp: HTTP Server</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main>
+    <h1>Dummy Java WebApp</h1>
+    <p>This page is served from <strong>webroot/index.html</strong> by the Java HTTP server.</p>
+
+    <form id="demoForm">
+      <label for="name">Name:</label>
+      <input id="name" name="name" type="text" placeholder="Your name" required />
+      <button type="submit">Greet me</button>
+    </form>
+
+    <p id="greeting"></p>
+
+    <div class="info-box">
+      <strong>Static resources:</strong>
+      <ul>
+        <li><a href="/index.html">index.html</a></li>
+        <li><a href="/styles.css">styles.css</a></li>
+        <li><a href="/app.js">app.js</a></li>
+      </ul>
+    </div>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

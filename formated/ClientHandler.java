@@ -39,9 +39,7 @@ public class ClientHandler implements Runnable {
             String method = parts.length > 0 ? parts[0] : "GET";
             String path = parts.length > 1 ? parts[1] : "/";
 
-            String response = Router.handleRequest(method, path, headers);
-
-            byte[] responseBytes = response.getBytes(StandardCharsets.UTF_8);
+            byte[] responseBytes = Router.handleRequest(method, path, headers);
             out.write(responseBytes);
             out.flush();
 
